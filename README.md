@@ -10,8 +10,6 @@ diff平台原理
 如何实现diff平台
 因为对java比较熟悉，使用spring boot+httpclient作为开发工具。虽然Spring boot来实现diff平台稍显笨重，但是实现起来还是比较方便的
 
-
-
 细节处理
 1.创建两个线程分别访问标准环境和提测环境
 
@@ -20,4 +18,4 @@ diff平台原理
 
 
 代码实现
-代码周末coding，后续提到github
+代码周末coding中
