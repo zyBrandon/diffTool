@@ -7,6 +7,6 @@ public class WordKey {
     public static final String ParamErrorMsg = "ParamError";
     public static final int DataError = 7001;
     public static final String DataErrorMsg = "DataError";
-    public static final String Get = "Get";
-    public static final String Post = "Post";
+    public static final String Get = "get";
+    public static final String Post = "post";
 }

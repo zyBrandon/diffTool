@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.library.WordKey;
 import com.example.demo.model.Case;
+import com.example.demo.service.DiffJson;
 import com.example.demo.service.GetCaseList;
 import com.example.demo.service.PostUrl;
 import com.example.demo.util.ApiResult;
@@ -35,6 +36,9 @@ public class RunDiff {
     @Autowired
     private PostUrl PostUrl;
 
+    @Autowired
+    private DiffJson diffJson;
+
 
 
 
@@ -52,13 +56,13 @@ public class RunDiff {
         //todo 拉线上线下地址
         //todo 发请求
         for (Case evrcase: arrCaseList) {
-
+            //logger.warn(evrcase.getUrl());
             try {
-                String thread_post_one = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod());
+                //String thread_post_one = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod());
                 String thread_post_two = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod());
-
+                logger.info(diffJson.diffjson(thread_post_two,""));
             } catch (Exception e){
-
+                e.printStackTrace();
             }
         }
 
