@@ -59,8 +59,9 @@ public class RunDiff {
             //logger.warn(evrcase.getUrl());
             try {
                 //String thread_post_one = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod());
-                String thread_post_two = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod());
-                logger.info(diffJson.diffjson(thread_post_two,""));
+                String thread_post_online = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod());
+                //logger.info(diffJson.diffjson(thread_post_two,""));
+                HashMap diffRes = (HashMap) diffJson.diffjson(thread_post_online,thread_post_online).getData();
             } catch (Exception e){
                 e.printStackTrace();
             }
