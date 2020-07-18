@@ -47,7 +47,7 @@ public class DiffJson extends BaseAction {
 
 
 
-        //RecursiveDiff diffUtil = new RecursiveDiff(json1, json2);
+        RecursiveDiff diffUtil = new RecursiveDiff(json_mirror, json_online);
 
         diffUtil.compareJson();
 
