@@ -9,8 +9,14 @@ public class WordKey {
     public static final String DataErrorMsg = "DataError";
     public static final String Get = "get";
     public static final String Post = "post";
+    public static final int getPostResError = 8001;
+    public static final String getPostResErrorMsg = "getPostResErrorMsg";
 
     //diff对比不一致
     public static final int DiffFasle = 400001;
     public static final int DiffTrue = 400000;
+
+    //线上字段
+    public static final String OnlineRep = "OnlineRep";
+    public static final String MirrorRes = "MirrorRes";
 }

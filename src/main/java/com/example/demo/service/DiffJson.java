@@ -28,7 +28,7 @@ public class DiffJson extends BaseAction {
         //JSONObject json = (JSONObject) JSONObject.toJSON(res);
 
         json_online = "{\"code\":200,\"msg\":\"Success\",\"data\":{\"zy\":100}}";
-        json_mirror = "{\"code\":200,\"msg\":\"Success\",\"data\":{\"zy\":100}}";
+        json_mirror = "{\"code\":200,\"msg\":\"Success\",\"data\":{}}";
 
         //String json1 = "{\"data\":{\"respCode\":[1,2,3],\"errMsg\":\"\",\"respData\":{\"nav\":[{\"aa\":[1,2,3]},{},{\"text\":\"大灰机\",\"href\":\"//mbiubiubiu\"}]}}}";
         //String json2 = "{\"data\":{\"aaaa\":1,\"respData\":{\"nav\":[{\"aa\":[2,1,3,4]},{},{\"text\":\"大灰机2\",\"href\":\"//mbiubiubiu\"}]},\"errMsg\":\"\",}}";
@@ -37,24 +37,15 @@ public class DiffJson extends BaseAction {
             return ApiResult.success(WordKey.DiffFasle,"","");
         }
 
-        //String diffRes = getcompareStr(json_mirror, json_online);
-
-        //logger.warn(diffRes);
-
-        //if (diffRes != json_mirror && diffRes != json_online){
-        //    return ApiResult.success(WordKey.DiffFasle,"","");
-        //}
-
-
 
         RecursiveDiff diffUtil = new RecursiveDiff(json_mirror, json_online);
 
         diffUtil.compareJson();
 
         System.out.println(diffUtil.getDiffRet());
-
-        //FormattedDiff diff = new FormattedDiff(json_online, json_mirror);
-        //System.out.println(diff.getDiffRet());
+        if (diffUtil.getDiffRet() == null){
+            return ApiResult.success(WordKey.DiffFasle,"","");
+        }
 
         return ApiResult.success(WordKey.DiffTrue,"",diffUtil.getDiffRet());
 

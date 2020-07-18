@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.library.ReplaceHost;
+import com.example.demo.library.Url_Collection;
 import com.example.demo.library.WordKey;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -37,7 +39,7 @@ public class PostUrl extends Thread{
             response = httpclient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
                 // 解析响应，获取数据
-                logger.warn("返回状态值为200");
+                //logger.warn("返回状态值为200");
                 String content = EntityUtils.toString(response.getEntity(), "UTF-8");
                 return content;
 
@@ -51,8 +53,17 @@ public class PostUrl extends Thread{
     }
 
     //@Async
-    public String PostUrl(String url, String param, String method) throws Exception{
+    public String PostUrl(String url, String param, String method,String operate) throws Exception{
 
+        //替换地址，端口号保留
+        if (operate.equals(WordKey.OnlineRep)){
+            url = ReplaceHost.replaceHost(url, Url_Collection.online_url);
+        } else if (operate.equals(WordKey.MirrorRes)){
+            url = ReplaceHost.replaceHost(url,Url_Collection.mirror_url);
+        }
+
+
+        //请求
         if (method.equals(WordKey.Get)){
             return Method_Get(url, param);
         } else if (method.equals(WordKey.Post)){
