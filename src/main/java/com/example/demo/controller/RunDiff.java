@@ -77,7 +77,8 @@ public class RunDiff {
                     continue;
                 }
 
-                //否则报警处理
+                //否则报警处理 记录到db中，db每天定时任务去发邮件
+
 
 
             } catch (Exception e){
