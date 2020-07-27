@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.library.Url_Collection;
 import com.example.demo.library.WordKey;
 import com.example.demo.model.Case;
+import com.example.demo.service.DiffEmail;
 import com.example.demo.service.DiffJson;
 import com.example.demo.service.GetCaseList;
 import com.example.demo.service.PostUrl;
@@ -40,6 +41,9 @@ public class RunDiff {
     @Autowired
     private DiffJson diffJson;
 
+    @Autowired
+    private DiffEmail diffEmail;
+
 
 
 
@@ -50,7 +54,7 @@ public class RunDiff {
     @RequestMapping(value = "rundiff",method = RequestMethod.GET)
     public ApiResult rundiff(@RequestParam String submitter){
         HashMap res = new HashMap();
-        //todo 判断是否登陆
+        //todo 判断是否登陆 结果为user_id
 
         //todo 拉集合case
         ArrayList<Case> arrCaseList = GetCaseList.getCaseList(submitter);
@@ -69,16 +73,19 @@ public class RunDiff {
                     return ApiResult.success(WordKey.getPostResError,WordKey.getPostResErrorMsg,"");
                 }
 
-                //todo diff
-
+                // diff
                 HashMap diffRes = (HashMap) diffJson.diffjson(post_mirror,post_online).getData();
+                int case_id = evrcase.getId();
                 //diff返回为空
                 if (null == diffRes){
+                    //todo 结果放入redie
+                    int diffEmailRedisRes = diffEmail.addDiffResToRedis(case_id,"",0).getCode();
                     continue;
                 }
 
-                //否则报警处理 记录到db中，db每天定时任务去发邮件
 
+                //否则报警处理 记录到db中，db每天定时任务去发邮件
+                int diffEmailDbRes = diffEmail.addDiffEmailToDB(case_id,diffRes.toString(),0,0).getCode();
 
 
             } catch (Exception e){

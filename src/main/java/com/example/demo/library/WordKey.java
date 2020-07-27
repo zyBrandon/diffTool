@@ -19,4 +19,15 @@ public class WordKey {
     //线上字段
     public static final String OnlineRep = "OnlineRep";
     public static final String MirrorRes = "MirrorRes";
+
+    //diff的失败关键字
+    //online.size > mirror.size
+    public static final String sizeDiff = "sizeDiff";
+    //online.key diff mirror.key
+    public static final String keyDiff = "keyDiff";
+    //online.value diff mirror.value
+    public static final String valueDiff = "valueDiff";
+    //online equal mirror
+    public static final String equalDiff = "equalDiff";
+
 }
