@@ -21,19 +21,19 @@ public class DiffJson extends BaseAction {
 
     public ApiResult diffjson(String json_mirror, String json_online){
 
+        System.out.println();
         logger.warn(String.valueOf(JSON.parse(json_mirror)));
-        //logger.warn(json_mirror);
         //转码为utf-8
         String res = String.valueOf(JSON.parse(json_mirror));
-        //JSONObject json = (JSONObject) JSONObject.toJSON(res);
 
-        json_online = "{\"code\":200,\"msg\":\"Success\",\"data\":{\"zy\":100}}";
-        json_mirror = "{\"code\":200,\"msg\":\"Success\",\"data\":{}}";
+
+        //json_online = "[{\"code\":200][\"msg\":\"Success\"][\"data\":{\"zy\":100}}]]";
+        //json_mirror = "[{\"code\":200,\"msg\":\"Success\",\"data\":{}}]";
 
         //String json1 = "{\"data\":{\"respCode\":[1,2,3],\"errMsg\":\"\",\"respData\":{\"nav\":[{\"aa\":[1,2,3]},{},{\"text\":\"大灰机\",\"href\":\"//mbiubiubiu\"}]}}}";
         //String json2 = "{\"data\":{\"aaaa\":1,\"respData\":{\"nav\":[{\"aa\":[2,1,3,4]},{},{\"text\":\"大灰机2\",\"href\":\"//mbiubiubiu\"}]},\"errMsg\":\"\",}}";
 
-        if (res == null){
+        /*if (res == null){
             return ApiResult.success(WordKey.DiffFasle,"","");
         }
 
@@ -48,7 +48,8 @@ public class DiffJson extends BaseAction {
         }
 
         return ApiResult.success(WordKey.DiffTrue,"",diffUtil.getDiffRet());
-
+        */
+        return ApiResult.success(WordKey.DiffTrue,"",JsonDiff.getRes(json_online,json_mirror));
     }
 
 

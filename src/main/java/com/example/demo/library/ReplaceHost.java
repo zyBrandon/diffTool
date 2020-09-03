@@ -26,9 +26,11 @@ public class ReplaceHost {
         for (int i = 0;i < url.length();i++){
             if (i > endNum){
                 urlRes += url.charAt(i);
+            } else {
+                urlRes += replace_url.charAt(i);
             }
 
-            urlRes += replace_url.charAt(i);
+
 
         }
 

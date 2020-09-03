@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController(value = "rundiff")
+@RestController()
 public class RunDiff {
     @Autowired
     private GetCaseList GetCaseList;
@@ -66,15 +66,15 @@ public class RunDiff {
         for (Case evrcase: arrCaseList) {
 
             try {
+                //post两个地方的接口
                 String post_mirror = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod(),WordKey.OnlineRep);
-
                 String post_online = PostUrl.PostUrl(evrcase.getUrl(),evrcase.getParam(),evrcase.getMethod(),WordKey.MirrorRes);
                 if (post_online == null || post_mirror == null){
                     return ApiResult.success(WordKey.getPostResError,WordKey.getPostResErrorMsg,"");
                 }
 
                 // diff
-                HashMap diffRes = (HashMap) diffJson.diffjson(post_mirror,post_online).getData();
+                String diffRes = (String) diffJson.diffjson(post_mirror,post_online).getData();
                 int case_id = evrcase.getId();
                 //diff返回为空
                 if (null == diffRes){

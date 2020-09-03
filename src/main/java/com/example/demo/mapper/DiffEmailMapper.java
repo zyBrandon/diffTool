@@ -16,7 +16,7 @@ public interface DiffEmailMapper {
                      @Param("is_send") int is_send, @Param("create_time") int create_time,@Param("update_time") int update_time);
 
 
-    @Select("select case_id,operate_user_id,is_send from diff_case_email where case_id=#{case_id},update_time>#{today_start_time} and update_time<#{today_end_time}")
+    @Select("select case_id,operate_user_id,is_send from diff_case_email where case_id=#{case_id} and update_time>#{today_start_time} and update_time<#{today_end_time}")
     ArrayList<DiffCaseEmail> getDiffEmailByCaseId(@Param("case_id") int case_id,@Param("today_start_time") int today_start_time,@Param("today_end_time") int today_end_time);
 
 }
